@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        vector<int> preSum(nums.size() + 1);
+        for (int i = 1; i < preSum.size(); i++) {
+            preSum[i] = preSum[i - 1] + nums[i - 1];
+        }
+        int ret = 0;
+        map<int, int> counts;
+        counts[preSum[0]]++;
+        for(int i = 1; i < preSum.size(); i++) {
+            ret += counts[preSum[i] - k];
+            counts[preSum[i]]++;
+        }
+        return ret;
+    }
+};
