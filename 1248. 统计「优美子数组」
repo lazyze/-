@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int numberOfSubarrays(vector<int>& nums, int k) {
+        for (int i = 0; i < nums.size(); i++) {
+            nums[i] %= 2;
+        }
+        int ret = 0;
+        vector<int> preSum(nums.size() + 1);
+        for (int i = 1; i < preSum.size(); i++) {
+            preSum[i] = preSum[i - 1] + nums[i - 1];
+        }
+        vector<int> counts(nums.size() + 1);
+        for (int i = 0; i < preSum.size(); i++) {
+            counts[preSum[i]]++;
+        }
+        for (int i = 1; i < preSum.size(); i++) {
+            if(preSum[i] - k >= 0)
+                ret += counts[preSum[i] - k];
+        }
+        return ret;
+    }
+};
