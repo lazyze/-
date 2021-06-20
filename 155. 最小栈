@@ -1,0 +1,41 @@
+class MinStack {
+    stack<int> record;
+    stack<int> record_min;
+
+public:
+    /** initialize your data structure here. */
+    MinStack() {
+    }
+    
+    void push(int val) {
+        record.push(val);
+        if(record_min.empty() || record_min.top() > val) {
+            record_min.push(val);
+        }
+        else {
+            record_min.push(record_min.top());
+        }
+    }
+    
+    void pop() {
+        record_min.pop();
+        record.pop();
+    }
+    
+    int top() {
+        return record.top();
+    }
+    
+    int getMin() {
+        return record_min.top();
+    }
+};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack* obj = new MinStack();
+ * obj->push(val);
+ * obj->pop();
+ * int param_3 = obj->top();
+ * int param_4 = obj->getMin();
+ */
