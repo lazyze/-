@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> record;
+        for (auto it:s) {
+            if (it == '(' || it == '{' || it == '[') {
+                record.push(it);
+            }
+            else
+            {
+                if(record.empty()) return false;
+                if (it == ')') {
+                    if (record.top() != '(') return false;
+                } else if (it == '}') {
+                    if (record.top() != '{') return false;
+                } else {
+                    if (record.top() != '[') return false;
+                }
+                record.pop();
+            }
+        }
+        if(!record.empty())return false;
+        return true;
+    }
+};
