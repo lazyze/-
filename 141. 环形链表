@@ -9,10 +9,11 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
+        if(head == NULL || head->next == NULL) return NULL;
         ListNode *protect = new ListNode;
         protect->next = head;
-        ListNode *slow = protect;
-        ListNode *quick = protect->next;
+        ListNode *slow = protect->next;
+        ListNode *quick = protect->next->next;
         while (quick != NULL) {
             if(quick == slow)return true;
             slow = slow->next;
