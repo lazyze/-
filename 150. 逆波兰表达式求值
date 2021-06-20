@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+        stack<int> numbers;
+        for (auto it:tokens) {
+            if(it[0] == '+' || it.back() == '-' || it[0] == '*' || it[0] == '/') {
+                int num2 = numbers.top();
+                numbers.pop();
+                int num1 = numbers.top();
+                numbers.pop();
+                int result = 0;
+                if(it[0] == '+') {
+                    result = num1 + num2;
+                } else if(it[0] == '-') {
+                    result = num1 - num2;
+                } else if(it[0] == '*') {
+                    result = num1 * num2;
+                } else {
+                    result = num1 / num2;
+                }
+                numbers.push(result);
+            } else {
+                numbers.push(stoi(it));
+            }
+        }
+        return numbers.top();
+    }
+};
