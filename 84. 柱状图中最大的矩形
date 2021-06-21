@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& heights) {
+        heights.push_back(0);
+        stack<rectangle> rec;
+        int ret = 0;
+        for (int i = 0; i < heights.size(); i++) {
+            int tempWidth = 0;
+            while (!rec.empty() && heights[i] < rec.top().height) {
+                tempWidth += rec.top().width;
+                ret = max(ret, rec.top().height * tempWidth);
+                rec.pop();
+            }
+            rec.push({heights[i], tempWidth + 1});
+        }
+        return ret;
+    }
+
+    struct rectangle{
+        int height;
+        int width;
+    };
+};
